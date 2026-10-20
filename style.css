@@ -424,102 +424,60 @@ body {
 }
 
 /* ====================================================================
-   NEW SECTION: KHO BÁU HÌNH ẢNH CỦA HOÀNG NGÂN (PHOTO CAROUSEL 3D)
+   NEW SECTION: KHO BÁU HÌNH ẢNH CỦA HOÀNG NGÂN (HORIZONTAL CAROUSEL)
    ==================================================================== */
 .gallery-carousel-wrapper {
   position: relative;
   width: 100%;
-  max-width: 880px;
+  max-width: 940px;
   margin: 10px auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 1200px;
+  padding: 0 46px;
 }
 
-.carousel-stage {
-  position: relative;
+.carousel-viewport {
   width: 100%;
-  height: 360px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-style: preserve-3d;
-  overflow: visible;
+  overflow: hidden;
+  padding: 12px 4px;
+  border-radius: var(--radius-md);
   touch-action: pan-y;
 }
 
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  align-items: stretch;
+}
+
+/* Thẻ ảnh nhỏ gọn (Compact Small Card) & nằm ngang */
 .carousel-slide {
-  position: absolute;
-  width: 320px;
-  max-width: 80vw;
+  flex: 0 0 215px;
+  width: 215px;
   background: rgba(28, 14, 34, 0.92);
   border: 1px solid var(--border-gold);
   border-radius: var(--radius-md);
-  padding: 12px 12px 14px;
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7);
-  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), 
-              opacity 0.65s ease, 
-              filter 0.65s ease,
-              border-color 0.4s ease,
-              box-shadow 0.4s ease;
-  will-change: transform, opacity;
+  padding: 10px 10px 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   user-select: none;
 }
 
-/* 3D Depth Classes for infinite coverflow */
-.carousel-slide.slide-center {
-  transform: translateX(0) scale(1) translateZ(0);
-  opacity: 1;
-  z-index: 10;
-  pointer-events: auto;
-  filter: none;
+.carousel-slide:hover,
+.carousel-slide.active-card {
+  transform: translateY(-5px) scale(1.02);
   border-color: var(--text-gold);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--primary-glow);
+  box-shadow: 0 18px 40px rgba(242, 106, 141, 0.45), 0 0 25px var(--primary-glow);
 }
 
-.carousel-slide.slide-center:hover {
-  transform: translateX(0) scale(1.02) translateZ(10px);
-  box-shadow: 0 25px 60px rgba(242, 106, 141, 0.45);
-}
-
-.carousel-slide.slide-right {
-  transform: translateX(62%) scale(0.85) translateZ(-80px) rotateY(-14deg);
-  opacity: 0.55;
-  z-index: 5;
-  pointer-events: auto;
-  filter: brightness(0.8);
-}
-
-.carousel-slide.slide-right:hover {
-  opacity: 0.8;
-  filter: brightness(0.95);
-}
-
-.carousel-slide.slide-left {
-  transform: translateX(-62%) scale(0.85) translateZ(-80px) rotateY(14deg);
-  opacity: 0.55;
-  z-index: 5;
-  pointer-events: auto;
-  filter: brightness(0.8);
-}
-
-.carousel-slide.slide-left:hover {
-  opacity: 0.8;
-  filter: brightness(0.95);
-}
-
-.carousel-slide.slide-back {
-  transform: translateX(0) scale(0.68) translateZ(-160px);
-  opacity: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Khung ảnh nằm ngang (Horizontal / Landscape) & nhỏ gọn */
+/* Khung ảnh nằm ngang (Horizontal / Landscape) & nhỏ nhắn */
 .polaroid-img-wrapper {
   position: relative;
   width: 100%;
@@ -535,43 +493,43 @@ body {
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.6s ease;
+  transition: transform 0.5s ease;
   pointer-events: none;
 }
 
-.carousel-slide.slide-center:hover .polaroid-img {
-  transform: scale(1.04);
+.carousel-slide:hover .polaroid-img {
+  transform: scale(1.05);
 }
 
 .polaroid-tag {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(14, 7, 18, 0.82);
+  top: 6px;
+  right: 6px;
+  background: rgba(14, 7, 18, 0.85);
   border: 1px solid var(--border-gold);
   color: var(--text-gold);
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: var(--radius-full);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
   backdrop-filter: blur(8px);
 }
 
 .polaroid-caption {
-  margin-top: 10px;
+  margin-top: 8px;
   text-align: center;
 }
 
 .polaroid-quote {
   font-family: var(--font-handwriting);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: #fff0f5;
   line-height: 1.3;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .polaroid-date {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-gold);
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -582,13 +540,13 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: rgba(22, 10, 28, 0.75);
+  background: rgba(22, 10, 28, 0.85);
   border: 1px solid var(--border-gold);
   color: var(--text-gold);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -601,11 +559,19 @@ body {
 }
 
 .carousel-nav-btn.btn-prev {
-  left: -20px;
+  left: 0;
 }
 
 .carousel-nav-btn.btn-next {
-  right: -20px;
+  right: 0;
+}
+
+.carousel-nav-btn:hover, .carousel-nav-btn:active {
+  background: var(--gradient-rose);
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 20px var(--primary-glow);
 }
 
 .carousel-nav-btn:hover, .carousel-nav-btn:active {
@@ -1545,30 +1511,20 @@ body {
     gap: 28px;
   }
   
-  .carousel-stage {
-    height: 330px;
+  .gallery-carousel-wrapper {
+    padding: 0 38px;
   }
 
   .carousel-slide {
-    width: 280px;
-    max-width: 78vw;
-    padding: 10px 10px 12px;
+    flex: 0 0 190px;
+    width: 190px;
+    padding: 8px 8px 10px;
   }
 
-  .carousel-slide.slide-right {
-    transform: translateX(55%) scale(0.82) translateZ(-60px) rotateY(-10deg);
-  }
-
-  .carousel-slide.slide-left {
-    transform: translateX(-55%) scale(0.82) translateZ(-60px) rotateY(10deg);
-  }
-
-  .carousel-nav-btn.btn-prev {
-    left: -5px;
-  }
-
-  .carousel-nav-btn.btn-next {
-    right: -5px;
+  .carousel-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
   }
 
   .preview-container {
@@ -1639,43 +1595,35 @@ body {
     font-size: 0.78rem;
   }
 
-  .carousel-stage {
-    height: 275px;
+  .gallery-carousel-wrapper {
+    padding: 0 30px;
   }
 
   .carousel-slide {
-    width: 235px;
-    max-width: 74vw;
-    padding: 9px 9px 11px;
+    flex: 0 0 160px;
+    width: 160px;
+    padding: 7px 7px 10px;
   }
 
   .polaroid-quote {
-    font-size: 1.05rem;
-  }
-
-  .polaroid-date {
-    font-size: 0.7rem;
-  }
-
-  .polaroid-tag {
-    font-size: 0.68rem;
-    padding: 2px 8px;
-    top: 6px;
-    right: 6px;
-  }
-
-  .carousel-nav-btn {
-    width: 36px;
-    height: 36px;
     font-size: 0.95rem;
   }
 
-  .carousel-nav-btn.btn-prev {
-    left: 2px;
+  .polaroid-date {
+    font-size: 0.65rem;
   }
 
-  .carousel-nav-btn.btn-next {
-    right: 2px;
+  .polaroid-tag {
+    font-size: 0.62rem;
+    padding: 2px 6px;
+    top: 5px;
+    right: 5px;
+  }
+
+  .carousel-nav-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
   }
 
   .letter-recipient-tabs {
