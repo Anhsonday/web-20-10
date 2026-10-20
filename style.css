@@ -440,7 +440,7 @@ body {
 .carousel-stage {
   position: relative;
   width: 100%;
-  height: 520px;
+  height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -451,13 +451,13 @@ body {
 
 .carousel-slide {
   position: absolute;
-  width: 330px;
+  width: 320px;
   max-width: 80vw;
-  background: rgba(28, 14, 34, 0.9);
+  background: rgba(28, 14, 34, 0.92);
   border: 1px solid var(--border-gold);
   border-radius: var(--radius-md);
-  padding: 16px 16px 22px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+  padding: 12px 12px 14px;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.7);
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), 
               opacity 0.65s ease, 
               filter 0.65s ease,
@@ -478,16 +478,16 @@ body {
   pointer-events: auto;
   filter: none;
   border-color: var(--text-gold);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px var(--primary-glow);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--primary-glow);
 }
 
 .carousel-slide.slide-center:hover {
   transform: translateX(0) scale(1.02) translateZ(10px);
-  box-shadow: 0 30px 70px rgba(242, 106, 141, 0.45);
+  box-shadow: 0 25px 60px rgba(242, 106, 141, 0.45);
 }
 
 .carousel-slide.slide-right {
-  transform: translateX(65%) scale(0.85) translateZ(-80px) rotateY(-14deg);
+  transform: translateX(62%) scale(0.85) translateZ(-80px) rotateY(-14deg);
   opacity: 0.55;
   z-index: 5;
   pointer-events: auto;
@@ -500,7 +500,7 @@ body {
 }
 
 .carousel-slide.slide-left {
-  transform: translateX(-65%) scale(0.85) translateZ(-80px) rotateY(14deg);
+  transform: translateX(-62%) scale(0.85) translateZ(-80px) rotateY(14deg);
   opacity: 0.55;
   z-index: 5;
   pointer-events: auto;
@@ -519,10 +519,11 @@ body {
   pointer-events: none;
 }
 
+/* Khung ảnh nằm ngang (Horizontal / Landscape) & nhỏ gọn */
 .polaroid-img-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 10;
   border-radius: var(--radius-sm);
   overflow: hidden;
   background: #1a0c20;
@@ -544,36 +545,36 @@ body {
 
 .polaroid-tag {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 8px;
+  right: 8px;
   background: rgba(14, 7, 18, 0.82);
   border: 1px solid var(--border-gold);
   color: var(--text-gold);
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   backdrop-filter: blur(8px);
 }
 
 .polaroid-caption {
-  margin-top: 16px;
+  margin-top: 10px;
   text-align: center;
 }
 
 .polaroid-quote {
   font-family: var(--font-handwriting);
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   color: #fff0f5;
-  line-height: 1.35;
-  margin-bottom: 6px;
+  line-height: 1.3;
+  margin-bottom: 3px;
 }
 
 .polaroid-date {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--text-gold);
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 /* Carousel Navigation Buttons */
@@ -1545,12 +1546,13 @@ body {
   }
   
   .carousel-stage {
-    height: 480px;
+    height: 330px;
   }
 
   .carousel-slide {
-    width: 290px;
+    width: 280px;
     max-width: 78vw;
+    padding: 10px 10px 12px;
   }
 
   .carousel-slide.slide-right {
@@ -1638,23 +1640,34 @@ body {
   }
 
   .carousel-stage {
-    height: 430px;
+    height: 275px;
   }
 
   .carousel-slide {
-    width: 250px;
-    max-width: 76vw;
-    padding: 12px 12px 18px;
+    width: 235px;
+    max-width: 74vw;
+    padding: 9px 9px 11px;
   }
 
   .polaroid-quote {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
+  }
+
+  .polaroid-date {
+    font-size: 0.7rem;
+  }
+
+  .polaroid-tag {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    top: 6px;
+    right: 6px;
   }
 
   .carousel-nav-btn {
-    width: 38px;
-    height: 38px;
-    font-size: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
   }
 
   .carousel-nav-btn.btn-prev {
@@ -1674,4 +1687,5 @@ body {
     font-size: 0.8rem;
   }
 }
+
 
