@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10 | Yêu Thương & Tôn Vinh</title>
+  <meta name="description" content="Trang kỷ niệm Ngày Phụ nữ Việt Nam 20/10. Gửi gắm những lời chúc ngọt ngào, thiệp tự tạo và những đóa hoa tri ân rạng rỡ tới một nửa tuyệt vời của thế giới.">
+  <meta name="keywords" content="20/10, ngày phụ nữ việt nam, lời chúc 20/10, thiệp 20/10, kỷ niệm 20 tháng 10">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10">
+  <meta property="og:description" content="Tôn vinh vẻ đẹp, sự dịu dàng và lòng kiên cường của người phụ nữ Việt Nam. Nhận ngay món quà bí mật và lời chúc ngọt ngào!">
+  <meta property="og:image" content="assets/hero-banner.jpg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Canvas for Rose Petals & Sparkling Dust -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Top Sticky Navigation & Sound Control -->
+  <header class="top-nav">
+    <a href="#hero" class="logo-badge" id="nav-logo">
+      <span class="logo-icon">🌹</span>
+      <span>20 Tháng 10</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-btn" id="btn-music-toggle" title="Bật/Tắt nhạc không lời lãng mạn">
+        <span id="music-icon">🎵</span>
+        <span id="music-text">Bật Nhạc</span>
+        <div class="music-wave paused" id="music-wave">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+      <button class="nav-btn" id="btn-quick-wish" title="Kéo xuống phần tạo thiệp">
+        <span>💌</span>
+        <span>Tạo Thiệp</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-container">
+      <div class="hero-pill">
+        <span>✨</span>
+        <span>Chào Mừng Ngày Phụ Nữ Việt Nam</span>
+        <span>✨</span>
+      </div>
+
+      <h1 class="hero-title">
+        Gửi Trọn Yêu Thương Đến <br>
+        <span class="hero-date-highlight">Một Nửa Tuyệt Vời</span> Của Thế Giới
+      </h1>
+
+      <p class="hero-subtitle">
+        Tháng mười dịu dàng ghé qua để nhắc nhở chúng ta về những nụ cười tỏa nắng, sự hy sinh thầm lặng và nét đẹp kiên cường của những người phụ nữ ta luôn trân quý nhất.
+      </p>
+
+      <div class="hero-banner-card">
+        <img src="assets/hero-banner.jpg" alt="Chúc Mừng Ngày Phụ Nữ Việt Nam 20 Tháng 10" class="hero-banner-img" id="hero-img">
+      </div>
+
+      <div class="hero-actions">
+        <a href="#gift-section" class="btn btn-primary" id="btn-hero-gift">
+          <span class="btn-icon">🎁</span>
+          <span>Mở Hộp Quà 20/10</span>
+        </a>
+        <a href="#card-section" class="btn btn-secondary" id="btn-hero-card">
+          <span class="btn-icon">✍️</span>
+          <span>Tạo Thiệp Chúc Mừng</span>
+        </a>
+        <a href="#bouquet-section" class="btn btn-secondary" id="btn-hero-flowers">
+          <span class="btn-icon">💐</span>
+          <span>Tặng Hoa Tươi Thắm</span>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Chân thành & Yêu thương</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">365 Ngày</span>
+          <span class="stat-label">Hạnh phúc & Luôn rạng ngời</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">Vô Cực</span>
+          <span class="stat-label">Nụ cười & May mắn đong đầy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Hộp Quà Bí Mật & Bức Thư Yêu Thương -->
+  <section class="section" id="gift-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Món Quà Ngọt Ngào</span>
+        <h2 class="section-title">Hộp Quà Tri Ân 20/10</h2>
+        <p class="section-desc">Chạm vào hộp quà để mở ra bức thư chan chứa tình cảm cùng những lời chúc sâu sắc dành riêng cho từng người thương yêu.</p>
+      </div>
+
+      <div class="gift-interactive-wrapper">
+        <div class="gift-box-visual">
+          <div class="gift-image-frame" id="interactive-gift-box">
+            <img src="assets/gift-box.jpg" alt="Hộp quà bí mật 20/10" class="gift-img">
+            <div class="gift-click-hint">✨ Nhấp để mở quà bí mật ✨</div>
+          </div>
+        </div>
+
+        <div class="gift-letter-area">
+          <div class="letter-recipient-tabs" id="recipient-tabs">
+            <button class="tab-btn active" data-type="mom">Mẹ Yêu 🤱</button>
+            <button class="tab-btn" data-type="lover">Người Yêu / Vợ 💖</button>
+            <button class="tab-btn" data-type="sister">Chị / Em Gái 🌸</button>
+            <button class="tab-btn" data-type="teacher">Cô Giáo 👩‍🏫</button>
+            <button class="tab-btn" data-type="friend">Bạn Bè & Đồng Nghiệp 👭</button>
+          </div>
+
+          <div class="letter-content-box" id="letter-content-display">
+            <div>
+              <h3 class="letter-heading" id="letter-recipient-title">Kính gửi Mẹ yêu quý của con,</h3>
+              <p class="letter-body" id="letter-body-text">
+                Cảm ơn Mẹ đã luôn là bến đỗ bình yên nhất, hy sinh cả thanh xuân để che chở và nuôi nấng con nên người. Nhân ngày 20/10, con chỉ mong Mẹ luôn dồi dào sức khỏe, an yên và nở nụ cười hạnh phúc mỗi ngày!
+              </p>
+            </div>
+            <div class="letter-footer">
+              <span class="letter-sender" id="letter-sign-text">Mãi yêu và biết ơn Mẹ rất nhiều ♥</span>
+              <div class="wax-seal">20.10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Tạo Thiệp Chúc Mừng & Tùy Biến Lời Chúc -->
+  <section class="section" id="card-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Gửi Trao Tâm Tình</span>
+        <h2 class="section-title">Tạo Thiệp Chúc Mừng Tùy Chọn</h2>
+        <p class="section-desc">Tự thiết kế tấm thiệp sang trọng, cá nhân hóa tên người nhận và dễ dàng sao chép hoặc tải thiệp về máy.</p>
+      </div>
+
+      <div class="card-creator-grid">
+        <!-- Form Controls -->
+        <div class="creator-panel">
+          <div class="form-group">
+            <label class="form-label" for="input-recipient">Tên người nhận (Ví dụ: Mẹ Thảo, Em Lan, Vợ Yêu...):</label>
+            <input type="text" id="input-recipient" class="form-input" value="Người Phụ Nữ Tuyệt Vời" placeholder="Nhập tên người bạn muốn gửi...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-sender">Tên người gửi (Ví dụ: Con trai, Anh yêu, Bạn thân...):</label>
+            <input type="text" id="input-sender" class="form-input" value="Người luôn trân quý bạn" placeholder="Nhập tên của bạn...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Chọn nhanh lời chúc gợi ý:</label>
+            <div class="quick-templates-bar">
+              <button class="btn-mini" data-template="sweet">Dịu dàng & Ngọt ngào 🍬</button>
+              <button class="btn-mini" data-template="respect">Tri ân & Kính trọng 🌟</button>
+              <button class="btn-mini" data-template="humor">Hóm hỉnh & Vui vẻ 😄</button>
+              <button class="btn-mini" data-template="success">Thành công & Tự tin 🚀</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-message">Nội dung lời chúc:</label>
+            <textarea id="input-message" class="form-textarea" placeholder="Viết những lời chân thành từ trái tim...">Chúc bạn ngày 20/10 ngập tràn niềm vui, luôn xinh đẹp rạng rỡ như đóa hoa sớm mai, hạnh phúc đong đầy và vạn sự như ý!</textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tông màu chủ đạo của thiệp:</label>
+            <div class="theme-options">
+              <div class="theme-dot theme-rose active" data-color="theme-rose" title="Hồng Nhung Quý Phái"></div>
+              <div class="theme-dot theme-gold" data-color="theme-gold" title="Ánh Kim Sang Trọng"></div>
+              <div class="theme-dot theme-lavender" data-color="theme-lavender" title="Tím Oải Hương Lãng Mạn"></div>
+              <div class="theme-dot theme-emerald" data-color="theme-emerald" title="Xanh Ngọc Quý Phái"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Preview Panel -->
+        <div class="preview-container">
+          <div class="live-card theme-rose" id="card-preview-target">
+            <div class="card-decor-corner corner-tl"></div>
+            <div class="card-decor-corner corner-tr"></div>
+            <div class="card-decor-corner corner-bl"></div>
+            <div class="card-decor-corner corner-br"></div>
+
+            <div class="card-header-badge">✨ KỶ NIỆM 20 THÁNG 10 ✨</div>
+
+            <div>
+              <h4 class="card-preview-to" id="preview-to-text">Gửi: Người Phụ Nữ Tuyệt Vời</h4>
+              <p class="card-preview-message" id="preview-msg-text">
+                "Chúc bạn ngày 20/10 ngập tràn niềm vui, luôn xinh đẹp rạng rỡ như đóa hoa sớm mai, hạnh phúc đong đầy và vạn sự như ý!"
+              </p>
+            </div>
+
+            <div class="card-preview-from" id="preview-from-text">
+              Thương gửi từ: Người luôn trân quý bạn ♥
+            </div>
+          </div>
+
+          <div class="preview-actions">
+            <button class="btn btn-primary" id="btn-copy-card">
+              <span>📋</span>
+              <span>Sao Chép Lời Chúc</span>
+            </button>
+            <button class="btn btn-secondary" id="btn-download-card">
+              <span>📥</span>
+              <span>Tải Ảnh Thiệp</span>
+            </button>
+            <button class="btn btn-secondary" id="btn-share-card">
+              <span>🚀</span>
+              <span>Chia Sẻ</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Vườn Hoa Tri Ân (Virtual Bouquet Builder) -->
+  <section class="section" id="bouquet-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Hoa Đẹp Gửi Người Đẹp</span>
+        <h2 class="section-title">Vườn Hoa Tri Ân 20/10</h2>
+        <p class="section-desc">Mỗi loài hoa mang một thông điệp thiêng liêng. Hãy chọn những bông hoa tươi đẹp nhất để kết thành bó hoa gửi tặng người phụ nữ bạn yêu thương.</p>
+      </div>
+
+      <div class="bouquet-builder-wrapper">
+        <div class="flowers-grid">
+          <!-- Flower 1 -->
+          <div class="flower-card" data-flower="🌹" data-name="Hoa Hồng Đỏ">
+            <span class="flower-emoji">🌹</span>
+            <h4 class="flower-name">Hoa Hồng Đỏ</h4>
+            <p class="flower-meaning">Biểu tượng cho tình yêu nồng nàn, sự trân quý và gắn kết vĩnh cửu.</p>
+            <button class="flower-pick-btn">+ Tặng hoa này</button>
+          </div>
+
+          <!-- Flower 2 -->
+          <div class="flower-card" data-flower="🌻" data-name="Hoa Hướng Dương">
+            <span class="flower-emoji">🌻</span>
+            <h4 class="flower-name">Hoa Hướng Dương</h4>
+            <p class="flower-meaning">Niềm tin, sự lạc quan, luôn hướng về phía ánh sáng mặt trời rạng rỡ.</p>
+            <button class="flower-pick-btn">+ Tặng hoa này</button>
+          </div>
+
+          <!-- Flower 3 -->
+          <div class="flower-card" data-flower="🌷" data-name="Hoa Tulip Hồng">
+            <span class="flower-emoji">🌷</span>
+            <h4 class="flower-name">Hoa Tulip Hồng</h4>
+            <p class="flower-meaning">Nét duyên dáng, dịu dàng, tấm lòng ân cần và hạnh phúc tròn đầy.</p>
+            <button class="flower-pick-btn">+ Tặng hoa này</button>
+          </div>
+
+          <!-- Flower 4 -->
+          <div class="flower-card" data-flower="🪷" data-name="Hoa Sen Thuần Khiết">
+            <span class="flower-emoji">🪷</span>
+            <h4 class="flower-name">Hoa Sen Thuần Khiết</h4>
+            <p class="flower-meaning">Biểu tượng phẩm chất thanh cao, kiên cường bất khuất của phụ nữ Việt.</p>
+            <button class="flower-pick-btn">+ Tặng hoa này</button>
+          </div>
+
+          <!-- Flower 5 -->
+          <div class="flower-card" data-flower="🌸" data-name="Hoa Cẩm Chướng">
+            <span class="flower-emoji">🌸</span>
+            <h4 class="flower-name">Hoa Cẩm Chướng</h4>
+            <p class="flower-meaning">Lòng biết ơn sâu nặng, tình mẫu tử thiêng liêng và sự bao dung.</p>
+            <button class="flower-pick-btn">+ Tặng hoa này</button>
+          </div>
+
+          <!-- Flower 6 -->
+          <div class="flower-card" data-flower="🌼" data-name="Hoa Cúc Họa Mi">
+            <span class="flower-emoji">🌼</span>
+            <h4 class="flower-name">Hoa Cúc Họa Mi</h4>
+            <p class="flower-meaning">Nét đẹp giản dị, ngây thơ, sự an lành và bình yên trong tâm hồn.</p>
+            <button class="flower-pick-btn">+ Tặng hoa này</button>
+          </div>
+        </div>
+
+        <!-- Bouquet Display Tray -->
+        <div class="bouquet-display-tray">
+          <div class="tray-header">
+            <h4 class="tray-title">Bó Hoa Yêu Thương Của Bạn</h4>
+            <span class="tray-count-badge" id="bouquet-count">0 Bông hoa</span>
+          </div>
+
+          <div class="bouquet-flowers-collection" id="bouquet-collection">
+            <span class="empty-tray-notice" id="empty-tray-text">Nhấp vào từng đóa hoa ở trên để thêm vào giỏ hoa trao tặng nhé! ✨</span>
+          </div>
+
+          <div class="tray-actions">
+            <button class="btn btn-primary" id="btn-send-bouquet">
+              <span>💐</span>
+              <span>Gửi Trọn Bó Hoa Này</span>
+            </button>
+            <button class="btn btn-secondary" id="btn-clear-bouquet">
+              <span>🔄</span>
+              <span>Làm Lại Giỏ Mới</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Rút Quẻ May Mắn 20/10 (Fortune Blessings) -->
+  <section class="section" id="fortune-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Thần Kỳ & May Mắn</span>
+        <h2 class="section-title">Rút Quẻ May Mắn 20/10</h2>
+        <p class="section-desc">Chọn một lá bài bạn có linh cảm nhất để đón nhận thông điệp phước lành và may mắn dành riêng cho bạn hôm nay.</p>
+      </div>
+
+      <div class="fortune-cards-grid">
+        <!-- Card 1 -->
+        <div class="fortune-card-container" data-card="1">
+          <div class="fortune-card-inner">
+            <div class="fortune-card-front">
+              <span class="card-pattern-icon">🔮</span>
+              <span class="card-number-label">Lá Bài I</span>
+              <h4 class="card-front-title">Sắc Tinh</h4>
+              <span class="card-flip-prompt">Chạm để lật bài ✨</span>
+            </div>
+            <div class="fortune-card-back">
+              <span class="back-symbol">👑</span>
+              <h4 class="back-title">Quẻ: Sắc Đẹp Vĩnh Cửu</h4>
+              <p class="back-prophecy">Vẻ đẹp tâm hồn và dung mạo của bạn sẽ ngày càng rạng ngời, luôn tỏa ra vầng sáng cuốn hút khiến mọi người ngưỡng mộ.</p>
+              <div class="back-blessing">"Mãi trẻ trung & quyến rũ!"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="fortune-card-container" data-card="2">
+          <div class="fortune-card-inner">
+            <div class="fortune-card-front">
+              <span class="card-pattern-icon">💎</span>
+              <span class="card-number-label">Lá Bài II</span>
+              <h4 class="card-front-title">Kim Tinh</h4>
+              <span class="card-flip-prompt">Chạm để lật bài ✨</span>
+            </div>
+            <div class="fortune-card-back">
+              <span class="back-symbol">💰</span>
+              <h4 class="back-title">Quẻ: Tài Lộc & Thịnh Vượng</h4>
+              <p class="back-prophecy">Công danh sự nghiệp hanh thông, công việc suôn sẻ, các dự án đầu tư đều đem lại kết quả vượt trên cả mong đợi.</p>
+              <div class="back-blessing">"Túi luôn đầy tiền, tâm luôn an!"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="fortune-card-container" data-card="3">
+          <div class="fortune-card-inner">
+            <div class="fortune-card-front">
+              <span class="card-pattern-icon">💖</span>
+              <span class="card-number-label">Lá Bài III</span>
+              <h4 class="card-front-title">Tình Tinh</h4>
+              <span class="card-flip-prompt">Chạm để lật bài ✨</span>
+            </div>
+            <div class="fortune-card-back">
+              <span class="back-symbol">🕊️</span>
+              <h4 class="back-title">Quẻ: Tình Duyên Nở Hoa</h4>
+              <p class="back-prophecy">Bạn luôn được nâng niu, trân trọng và đắm chìm trong tình yêu chân thành, ngọt ngào và thủy chung của người thương.</p>
+              <div class="back-blessing">"Yêu và được yêu trọn vẹn!"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="fortune-card-container" data-card="4">
+          <div class="fortune-card-inner">
+            <div class="fortune-card-front">
+              <span class="card-pattern-icon">🌿</span>
+              <span class="card-number-label">Lá Bài IV</span>
+              <h4 class="card-front-title">An Tinh</h4>
+              <span class="card-flip-prompt">Chạm để lật bài ✨</span>
+            </div>
+            <div class="fortune-card-back">
+              <span class="back-symbol">🍵</span>
+              <h4 class="back-title">Quẻ: Thân Tâm An Lạc</h4>
+              <p class="back-prophecy">Mọi phiền muộn đều tan biến, mỗi sớm mai thức dậy là một ngày ngập tràn niềm vui, sức khỏe dồi dào và bình an tuyệt đối.</p>
+              <div class="back-blessing">"Vạn sự tùy duyên, an nhiên tự tại!"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Bức Tường Tri Ân & Thơ Ca Tôn Vinh -->
+  <section class="section" id="quotes-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Lời Vàng Ý Ngọc</span>
+        <h2 class="section-title">Khúc Ca Tôn Vinh Phụ Nữ Việt Nam</h2>
+        <p class="section-desc">Những vần thơ và câu nói đi cùng năm tháng ngợi ca vẻ đẹp bất diệt của người phụ nữ quê hương.</p>
+      </div>
+
+      <div class="quotes-grid">
+        <div class="quote-card">
+          <div class="quote-poem-body">
+            "Anh hùng, bất khuất, trung hậu, đảm đang — Tám chữ vàng Bác Hồ đã dành tặng để khắc ghi truyền thống vẻ vang và đức hy sinh cao cả của người phụ nữ Việt Nam."
+          </div>
+          <div class="quote-author">
+            <div class="author-avatar">🇻🇳</div>
+            <div>
+              <div class="author-name">Chủ tịch Hồ Chí Minh</div>
+              <div class="author-role">Lời khen tặng lịch sử</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-poem-body">
+            "Bàn tay người phụ nữ dệt nên cả mùa xuân, giữ lửa cho tổ ấm và thắp sáng niềm tin trong những lúc gian khó nhất của cuộc đời."
+          </div>
+          <div class="quote-author">
+            <div class="author-avatar">✨</div>
+            <div>
+              <div class="author-name">Tác phẩm Bất Hủ</div>
+              <div class="author-role">Tri ân người giữ lửa</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-poem-body">
+            "Dù là người mẹ tần tảo sớm hôm, người vợ hiền thảo hay người phụ nữ hiện đại tự tin tỏa sáng nơi công sở, bạn đều là đóa hoa rực rỡ nhất trần gian."
+          </div>
+          <div class="quote-author">
+            <div class="author-avatar">🌹</div>
+            <div>
+              <div class="author-name">Gửi Một Nửa Thế Giới</div>
+              <div class="author-role">Thông điệp 20/10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gift Unboxing Modal -->
+  <div class="modal-overlay" id="gift-modal">
+    <div class="gift-modal-card">
+      <button class="modal-close-btn" id="modal-close">&times;</button>
+      <div class="modal-ribbon">🎀</div>
+      <h3 class="modal-title">Món Quà Đặc Biệt 20/10</h3>
+      <p class="modal-message" id="modal-secret-msg">
+        "Chúc bạn luôn tỏa sáng như ánh mặt trời, dịu dàng như làn gió thu và luôn được trân quý bởi tất cả những điều tuyệt vời nhất!"
+      </p>
+      <button class="btn btn-primary" id="btn-modal-celebrate">
+        <span>🎉</span>
+        <span>Cảm Ơn Món Quà Rất Nhiều!</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notice" id="toast-notice">
+    <span id="toast-icon">✨</span>
+    <span id="toast-msg">Đã sao chép lời chúc thành công!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-logo">🌹 20 Tháng 10 - Tôn Vinh Phụ Nữ Việt Nam</div>
+      <p class="footer-quote">"Hạnh phúc của bạn chính là niềm tự hào của chúng tôi."</p>
+      <p class="footer-copy">
+        Thiết kế với tất cả lòng biết ơn và yêu thương <heart>♥</heart> Dành tặng mọi người phụ nữ tuyệt vời.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
