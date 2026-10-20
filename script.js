@@ -1,8 +1,8 @@
 /**
  * ====================================================================
- * WEBSITE KỶ NIỆM 20/10 - NGÀY PHỤ NỮ VIỆT NAM
+ * WEBSITE KỶ NIỆM 20/10 - DÀNH RIÊNG CHO HOÀNG NGÂN TỪ NGỌC SƠN
  * Interactive Engine: Canvas Petals, Audio Synthesizer,
- * Card Generator, Bouquet Builder, Fortune Cards
+ * Photo Lightbox, Card Generator, Bouquet Builder, Fortune Cards
  * ====================================================================
  */
 
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       osc.start();
       osc.stop(audioCtx.currentTime + duration);
     } catch (e) {
-      console.warn('Audio not allowed yet:', e);
+      console.warn('Audio note error:', e);
     }
   }
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function playSparkleSound() {
     const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
     notes.forEach((freq, idx) => {
-      setTimeout(() => playChime(freq, 0.6), idx * 75);
+      setTimeout(() => playChime(freq, 0.5), idx * 75);
     });
   }
 
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(900, audioCtx.currentTime);
+      filter.frequency.setValueAtTime(850, audioCtx.currentTime);
 
       gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.8);
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       musicBtn.classList.add('active');
       musicText.textContent = 'Đang Phát Nhạc';
       playSparkleSound();
-      showToast('🎵 Đang phát giai điệu piano lãng mạn nhẹ nhàng');
+      showToast('🎵 Đang phát giai điệu piano ngọt ngào dành tặng Hoàng Ngân');
       playMelodyStep();
       musicTimer = setInterval(playMelodyStep, 750);
     } else {
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const petals = [];
-  const PETAL_COUNT = 38;
+  const PETAL_COUNT = window.innerWidth < 600 ? 25 : 38;
 
   class Petal {
     constructor() {
@@ -141,22 +141,22 @@ document.addEventListener('DOMContentLoaded', () => {
     reset(initial = false) {
       this.x = Math.random() * width;
       this.y = initial ? Math.random() * height : -30;
-      this.size = Math.random() * 12 + 10;
-      this.speedY = Math.random() * 1.2 + 0.8;
-      this.speedX = Math.random() * 1 - 0.5;
+      this.size = Math.random() * 11 + 9;
+      this.speedY = Math.random() * 1.1 + 0.7;
+      this.speedX = Math.random() * 0.9 - 0.45;
       this.angle = Math.random() * Math.PI * 2;
       this.rotationSpeed = (Math.random() - 0.5) * 0.03;
       this.flip = Math.random();
       this.flipSpeed = Math.random() * 0.03 + 0.01;
-      this.opacity = Math.random() * 0.65 + 0.35;
+      this.opacity = Math.random() * 0.6 + 0.35;
       this.color = Math.random() > 0.35 
         ? 'rgba(242, 106, 141, ' 
-        : (Math.random() > 0.5 ? 'rgba(232, 195, 125, ' : 'rgba(255, 180, 200, ');
+        : (Math.random() > 0.5 ? 'rgba(232, 195, 125, ' : 'rgba(255, 182, 193, ');
     }
 
     update() {
       this.y += this.speedY;
-      this.x += Math.sin(this.angle) * 1.1 + this.speedX;
+      this.x += Math.sin(this.angle) * 1.0 + this.speedX;
       this.angle += this.rotationSpeed;
       this.flip += this.flipSpeed;
 
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.rotate(this.angle);
       ctx.scale(1, Math.sin(this.flip));
 
-      // Draw rose petal teardrop path
+      // Rose petal shape
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.bezierCurveTo(this.size / 2, -this.size / 2, this.size, 0, 0, this.size);
@@ -180,8 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.fillStyle = this.color + this.opacity + ')';
       ctx.fill();
 
-      // Delicate petal vein highlight
-      ctx.strokeStyle = 'rgba(255, 255, 255, ' + (this.opacity * 0.35) + ')';
+      ctx.strokeStyle = 'rgba(255, 255, 255, ' + (this.opacity * 0.3) + ')';
       ctx.lineWidth = 0.8;
       ctx.beginPath();
       ctx.moveTo(0, 0);
@@ -196,11 +195,11 @@ document.addEventListener('DOMContentLoaded', () => {
     petals.push(new Petal());
   }
 
-  // Sparkling background stars
-  const sparkles = Array.from({ length: 28 }, () => ({
+  // Twinkling stars
+  const sparkles = Array.from({ length: 22 }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
-    radius: Math.random() * 1.6 + 0.5,
+    radius: Math.random() * 1.5 + 0.5,
     alpha: Math.random(),
     speed: Math.random() * 0.02 + 0.01
   }));
@@ -208,17 +207,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function animateCanvas() {
     ctx.clearRect(0, 0, width, height);
 
-    // Draw twinkling sparkles
     sparkles.forEach(s => {
       s.alpha += s.speed;
       if (s.alpha > 1 || s.alpha < 0) s.speed = -s.speed;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(248, 223, 158, ${Math.abs(s.alpha) * 0.55})`;
+      ctx.fillStyle = `rgba(248, 223, 158, ${Math.abs(s.alpha) * 0.5})`;
       ctx.fill();
     });
 
-    // Draw floating petals
     petals.forEach(p => {
       p.update();
       p.draw();
@@ -250,23 +247,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. CONFETTI BURST ANIMATION
   // ==================================================================
   function launchConfetti(originX = window.innerWidth / 2, originY = window.innerHeight / 2) {
-    const confettiCount = 50;
+    const confettiCount = window.innerWidth < 600 ? 35 : 55;
     const colors = ['#f26a8d', '#e8c37d', '#ffffff', '#ffd3df', '#a62a4d'];
     const particles = [];
 
     for (let i = 0; i < confettiCount; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 8 + 4;
+      const speed = Math.random() * 7 + 3;
       particles.push({
         x: originX,
         y: originY,
         vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed - 3,
-        size: Math.random() * 8 + 4,
+        vy: Math.sin(angle) * speed - 2.5,
+        size: Math.random() * 7 + 4,
         color: colors[Math.floor(Math.random() * colors.length)],
         rotation: Math.random() * 360,
         rotSpeed: Math.random() * 10 - 5,
-        alpha: 1,
         life: 1
       });
     }
@@ -294,9 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
           alive = true;
           p.x += p.vx;
           p.y += p.vy;
-          p.vy += 0.25; // gravity
+          p.vy += 0.22;
           p.rotation += p.rotSpeed;
-          p.life -= 0.018;
+          p.life -= 0.02;
 
           cCtx.save();
           cCtx.translate(p.x, p.y);
@@ -318,33 +314,66 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==================================================================
-  // 5. SECTION 1: HỘP QUÀ BÍ MẬT & BỨC THƯ YÊU THƯƠNG
+  // 5. PHOTO LIGHTBOX PREVIEW (ZOOM MODAL)
+  // ==================================================================
+  const polaroids = document.querySelectorAll('.polaroid-card');
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+
+  polaroids.forEach(card => {
+    card.addEventListener('click', () => {
+      const src = card.getAttribute('data-img');
+      const caption = card.getAttribute('data-caption');
+      lightboxImg.src = src;
+      lightboxCaption.textContent = caption;
+      lightboxModal.classList.add('active');
+      playChime(659.25, 0.3);
+    });
+  });
+
+  lightboxClose.addEventListener('click', () => {
+    lightboxModal.classList.remove('active');
+  });
+
+  lightboxModal.addEventListener('click', (e) => {
+    if (e.target === lightboxModal) {
+      lightboxModal.classList.remove('active');
+    }
+  });
+
+  // Nav scroll to gallery
+  const btnQuickGallery = document.getElementById('btn-quick-gallery');
+  if (btnQuickGallery) {
+    btnQuickGallery.addEventListener('click', () => {
+      document.getElementById('gallery-section').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // ==================================================================
+  // 6. SECTION: HỘP QUÀ TÌNH YÊU & BỨC THƯ TỪ NGỌC SƠN GỬI HOÀNG NGÂN
   // ==================================================================
   const lettersData = {
-    mom: {
-      title: 'Kính gửi Mẹ yêu quý của con,',
-      body: 'Cảm ơn Mẹ đã luôn là bến đỗ bình yên nhất, hy sinh cả thanh xuân để che chở và nuôi nấng con nên người. Nhân ngày 20/10, con chỉ mong Mẹ luôn dồi dào sức khỏe, an yên và nở nụ cười hạnh phúc mỗi ngày!',
-      sign: 'Mãi yêu và biết ơn Mẹ rất nhiều ♥'
+    wish: {
+      title: 'Hoàng Ngân em yêu thương của anh,',
+      body: 'Chúc em một ngày 20/10 thật ngọt ngào, ngập tràn tiếng cười và những điều tốt đẹp nhất. Cảm ơn em vì đã đến, mang theo ấm áp và nụ cười rạng ngời làm bừng sáng cuộc sống của anh!',
+      sign: 'Anh yêu Hoàng Ngân rất nhiều — Ngọc Sơn ♥'
     },
-    lover: {
-      title: 'Gửi người con gái anh yêu nhất,',
-      body: 'Em là món quà tuyệt vời nhất mà cuộc sống này đã ban tặng cho anh. Chúc em ngày 20/10 luôn xinh đẹp rạng rỡ, ngập tràn tiếng cười và luôn cảm thấy ấm áp, hạnh phúc khi ở bên anh!',
-      sign: 'Yêu em hơn ngàn lời nói ♥'
+    love: {
+      title: 'Những điều anh yêu ở Hoàng Ngân,',
+      body: 'Anh yêu từng nụ cười tít mắt của em, yêu cái cách em quan tâm anh bằng những điều nhỏ nhặt nhất, và yêu cả những lúc em giận dỗi đáng yêu. Trong mắt anh, em luôn là điều hoàn hảo nhất!',
+      sign: 'Chỉ yêu riêng mình em — Ngọc Sơn ♥'
     },
-    sister: {
-      title: 'Gửi Chị / Em gái đáng yêu,',
-      body: 'Chúc người phụ nữ vừa điệu đà vừa tài giỏi của gia đình có một ngày 20/10 ngập tràn niềm vui, nhận được thật nhiều hoa, nhiều quà và ngày càng thăng hoa trong công việc lẫn cuộc sống nhé!',
-      sign: 'Tự hào về chị/em rất nhiều ♥'
+    promise: {
+      title: 'Lời hứa của Ngọc Sơn dành cho em,',
+      body: 'Dù hiện tại hay mai sau, anh hứa sẽ luôn là điểm tựa vững chãi, luôn lắng nghe, chia sẻ và đồng hành cùng Hoàng Ngân qua mọi cung bậc của cuộc sống. Anh sẽ làm tất cả để em luôn hạnh phúc!',
+      sign: 'Mãi là chỗ dựa của Ngân — Ngọc Sơn ♥'
     },
-    teacher: {
-      title: 'Kính gửi Cô giáo kính yêu,',
-      body: 'Nhân ngày Phụ nữ Việt Nam 20/10, em xin gửi lời tri ân chân thành nhất tới Cô — người đã tận tâm dìu dắt, thắp sáng ước mơ và trao cho chúng em tri thức vô giá. Kính chúc Cô luôn mạnh khỏe, hạnh phúc!',
-      sign: 'Học trò tri ân sâu sắc ♥'
-    },
-    friend: {
-      title: 'Gửi Bạn thân & Nữ đồng nghiệp tuyệt vời,',
-      body: 'Chúc bạn một ngày 20/10 thật rực rỡ! Chúc bạn lúc nào cũng vui tươi, rạng ngời, việc nhẹ lương cao, sớm đạt được mọi ước mơ và luôn là phiên bản tự tin, lấp lánh nhất của chính mình!',
-      sign: 'Mãi là đồng đội tuyệt vời nhé ♥'
+    morning: {
+      title: 'Nhắn nhủ Hoàng Ngân mỗi ngày,',
+      body: 'Mỗi sớm mai thức dậy, anh luôn thấy biết ơn vì có em trong đời. Hãy luôn tự tin, mỉm cười thật tươi và nhớ rằng có một người tên Ngọc Sơn luôn yêu thương và tự hào về em rất nhiều nhé!',
+      sign: 'Mãi yêu công chúa của anh ♥'
     }
   };
 
@@ -363,17 +392,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = lettersData[type];
 
       letterBox.style.opacity = '0';
-      letterBox.style.transform = 'translateY(10px)';
-      playChime(659.25, 0.4);
+      letterBox.style.transform = 'translateY(8px)';
+      playChime(659.25, 0.35);
 
       setTimeout(() => {
         letterTitle.textContent = data.title;
         letterBody.textContent = data.body;
         letterSign.textContent = data.sign;
-        letterBox.style.transition = 'all 0.35s ease';
+        letterBox.style.transition = 'all 0.32s ease';
         letterBox.style.opacity = '1';
         letterBox.style.transform = 'translateY(0)';
-      }, 200);
+      }, 180);
     });
   });
 
@@ -383,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalClose = document.getElementById('modal-close');
   const modalCelebrateBtn = document.getElementById('btn-modal-celebrate');
 
-  function openGiftModal(e) {
+  function openGiftModal() {
     playSparkleSound();
     const rect = giftBoxFrame.getBoundingClientRect();
     launchConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
@@ -396,17 +425,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   giftBoxFrame.addEventListener('click', openGiftModal);
   document.getElementById('btn-hero-gift').addEventListener('click', (e) => {
-    // Smooth scroll to section then trigger after short delay
-    setTimeout(() => {
-      openGiftModal(e);
-    }, 600);
+    setTimeout(openGiftModal, 600);
   });
 
   modalClose.addEventListener('click', closeGiftModal);
   modalCelebrateBtn.addEventListener('click', () => {
     closeGiftModal();
     launchConfetti();
-    showToast('🎉 Chúc bạn một ngày 20/10 ngập tràn niềm vui!');
+    showToast('💖 Ngọc Sơn mãi yêu Hoàng Ngân!');
   });
 
   giftModal.addEventListener('click', (e) => {
@@ -414,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==================================================================
-  // 6. SECTION 2: TẠO THIỆP CHÚC MỪNG TÙY CHỌN
+  // 7. SECTION: TẠO THIỆP TÌNH YÊU CHO HOÀNG NGÂN
   // ==================================================================
   const inputRecipient = document.getElementById('input-recipient');
   const inputSender = document.getElementById('input-sender');
@@ -427,41 +453,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const templateBtns = document.querySelectorAll('.btn-mini[data-template]');
 
   const templates = {
-    sweet: 'Chúc em ngày 20/10 ngọt ngào như viên kẹo, rạng rỡ như ánh bình minh và luôn là điều bình yên dịu dàng nhất!',
-    respect: 'Nhân ngày 20/10, con/em xin gửi lời tri ân sâu sắc và lòng biết ơn chân thành nhất. Kính chúc người luôn an vui, dồi dào sức khỏe và ngập tràn may mắn!',
-    humor: 'Chúc bạn 20/10 tay ôm nhiều quà, miệng cười toe toét, ăn no không béo, ví dày cộm tiền và sớm có người yêu đón rước!',
-    success: 'Chúc bạn ngày 20/10 tỏa sáng rực rỡ, ngày càng tự tin, bản lĩnh và gặt hái thêm nhiều thành công vang dội trên con đường đã chọn!'
+    sweet: 'Chúc em ngày 20/10 ngập tràn niềm vui, luôn xinh đẹp rạng rỡ và nhận được tất cả những điều tốt đẹp nhất. Anh sẽ luôn ở đây để nắm tay và yêu thương Hoàng Ngân!',
+    care: 'Hoàng Ngân ngoan nhé, đừng thức khuya nhiều, nhớ giữ gìn sức khỏe. Bất kể khi nào em mệt mỏi, luôn có vòng tay của Ngọc Sơn ở đây ôm em vào lòng!',
+    future: 'Chúc công chúa của anh một ngày 20/10 ngập tràn hạnh phúc. Anh mong những ngày 20/10 sau này và mãi mãi về sau, chúng ta vẫn sẽ cùng nhau đón những điều tuyệt vời nhất!',
+    cute: 'Chúc Hoàng Ngân 20/10 ngày càng xinh xắn, cười nhiều hơn, ăn ngoan không béo và lúc nào cũng là cô bé đáng yêu nhất quả đất của anh!'
   };
 
-  // Sync Input to Preview
   function updateCardPreview() {
-    previewTo.textContent = `Gửi: ${inputRecipient.value.trim() || 'Người Phụ Nữ Tuyệt Vời'}`;
-    previewMsg.textContent = `"${inputMessage.value.trim() || 'Chúc bạn luôn xinh đẹp, hạnh phúc và an lành!'}"`;
-    previewFrom.textContent = `Thương gửi từ: ${inputSender.value.trim() || 'Người trân quý bạn'} ♥`;
+    previewTo.textContent = `Gửi: ${inputRecipient.value.trim() || 'Hoàng Ngân Em Yêu'}`;
+    previewMsg.textContent = `"${inputMessage.value.trim() || 'Anh mãi yêu Hoàng Ngân!'}"`;
+    previewFrom.textContent = `Thương gửi từ: ${inputSender.value.trim() || 'Ngọc Sơn'} ♥`;
   }
 
   inputRecipient.addEventListener('input', updateCardPreview);
   inputSender.addEventListener('input', updateCardPreview);
   inputMessage.addEventListener('input', updateCardPreview);
 
-  // Template Quick Picks
   templateBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const type = btn.getAttribute('data-template');
       inputMessage.value = templates[type];
       updateCardPreview();
       playChime(783.99, 0.3);
-      showToast('Đã chọn mẫu lời chúc gợi ý!');
+      showToast('Đã chọn mẫu lời chúc yêu thương!');
     });
   });
 
-  // Theme color picking
   themeDots.forEach(dot => {
     dot.addEventListener('click', () => {
       themeDots.forEach(d => d.classList.remove('active'));
       dot.classList.add('active');
       const colorClass = dot.getAttribute('data-color');
-
       cardPreview.className = `live-card ${colorClass}`;
       playChime(880, 0.3);
     });
@@ -469,19 +491,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Copy Wish Text
   document.getElementById('btn-copy-card').addEventListener('click', () => {
-    const textToCopy = `🌸 CHÚC MỪNG 20/10 🌸\n${previewTo.textContent}\n\n${previewMsg.textContent}\n\n${previewFrom.textContent}\n✨ Chúc một ngày Phụ nữ Việt Nam trọn vẹn yêu thương! ✨`;
+    const textToCopy = `🌸 CHÚC MỪNG 20/10 EM YÊU 🌸\n${previewTo.textContent}\n\n${previewMsg.textContent}\n\n${previewFrom.textContent}\n✨ Mãi yêu Hoàng Ngân! ✨`;
 
     navigator.clipboard.writeText(textToCopy).then(() => {
-      showToast('📋 Đã sao chép lời chúc vào khay nhớ tạm!');
+      showToast('📋 Đã sao chép lời chúc gửi Hoàng Ngân!');
       playSparkleSound();
     }).catch(() => {
-      showToast('Không thể tự động sao chép, vui lòng bôi đen để copy!');
+      showToast('Hãy bôi đen để sao chép nhé!');
     });
   });
 
   // Download Card as Image (Offscreen Canvas Renderer)
   document.getElementById('btn-download-card').addEventListener('click', () => {
-    showToast('🎨 Đang tạo ảnh thiệp độ phân giải cao...');
+    showToast('🎨 Đang vẽ thiệp tặng Hoàng Ngân độ phân giải cao...');
     playSparkleSound();
 
     const dCanvas = document.createElement('canvas');
@@ -489,7 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
     dCanvas.height = 700;
     const dCtx = dCanvas.getContext('2d');
 
-    // Background Gradient based on active theme
     const activeDot = document.querySelector('.theme-dot.active');
     const colorType = activeDot ? activeDot.getAttribute('data-color') : 'theme-rose';
 
@@ -511,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dCtx.fillStyle = grad;
     dCtx.fillRect(0, 0, 1200, 700);
 
-    // Golden Ornate Border
+    // Ornate Border
     dCtx.strokeStyle = '#e8c37d';
     dCtx.lineWidth = 4;
     dCtx.strokeRect(40, 40, 1120, 620);
@@ -523,16 +544,16 @@ document.addEventListener('DOMContentLoaded', () => {
     dCtx.fillStyle = '#e8c37d';
     dCtx.font = 'bold 22px "Plus Jakarta Sans", sans-serif';
     dCtx.textAlign = 'center';
-    dCtx.fillText('✨ KỶ NIỆM NGÀY PHỤ NỮ VIỆT NAM 20 THÁNG 10 ✨', 600, 120);
+    dCtx.fillText('✨ KỶ NIỆM 20/10 — DÀNH RIÊNG CHO HOÀNG NGÂN ✨', 600, 120);
 
     // Recipient
     dCtx.fillStyle = '#ffffff';
     dCtx.font = 'bold 44px "Playfair Display", serif';
     dCtx.fillText(previewTo.textContent, 600, 200);
 
-    // Message Text (with word wrap)
+    // Message Text
     dCtx.fillStyle = '#ffeef3';
-    dCtx.font = 'italic 34px "Dancing Script", cursive, serif';
+    dCtx.font = 'italic 32px "Dancing Script", cursive, serif';
 
     const words = previewMsg.textContent.split(' ');
     let line = '';
@@ -545,7 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (metrics.width > maxWidth && n > 0) {
         dCtx.fillText(line, 600, y);
         line = words[n] + ' ';
-        y += 50;
+        y += 48;
       } else {
         line = testLine;
       }
@@ -559,19 +580,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Trigger download
     const link = document.createElement('a');
-    link.download = 'Thiep_Chuc_Mung_20_10.png';
+    link.download = 'Thiep_20_10_Tang_Hoang_Ngan.png';
     link.href = dCanvas.toDataURL('image/png');
     link.click();
 
     launchConfetti();
-    showToast('📥 Đã tải ảnh thiệp về máy thành công!');
+    showToast('📥 Đã tải ảnh thiệp tặng Hoàng Ngân thành công!');
   });
 
-  // Web Share or Copy Link
+  // Share
   document.getElementById('btn-share-card').addEventListener('click', () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Chúc Mừng Ngày 20/10',
+        title: 'Chúc Mừng 20/10 Hoàng Ngân',
         text: `${previewTo.textContent} - ${previewMsg.textContent}`,
         url: window.location.href
       }).then(() => {
@@ -585,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==================================================================
-  // 7. SECTION 3: VƯỜN HOA TRI ÂN (VIRTUAL BOUQUET BUILDER)
+  // 8. SECTION: VƯỜN HOA TẶNG HOÀNG NGÂN (VIRTUAL BOUQUET)
   // ==================================================================
   const flowerCards = document.querySelectorAll('.flower-card');
   const bouquetCollection = document.getElementById('bouquet-collection');
@@ -614,8 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
       bouquetCollection.appendChild(flowerEl);
 
       bouquetCount.textContent = `${bouquetFlowers.length} Bông hoa`;
-      playChime(523.25 + bouquetFlowers.length * 30, 0.35);
-      showToast(`+1 ${name} đã được thêm vào bó hoa!`, emoji);
+      playChime(523.25 + bouquetFlowers.length * 35, 0.35);
+      showToast(`+1 ${name} đã gửi vào giỏ hoa của Ngân!`, emoji);
     });
   });
 
@@ -625,26 +646,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const notice = document.createElement('span');
     notice.className = 'empty-tray-notice';
     notice.id = 'empty-tray-text';
-    notice.textContent = 'Nhấp vào từng đóa hoa ở trên để thêm vào giỏ hoa trao tặng nhé! ✨';
+    notice.textContent = 'Nhấp vào từng đóa hoa ở trên để thêm vào giỏ hoa gửi Hoàng Ngân nhé! ✨';
     bouquetCollection.appendChild(notice);
     bouquetCount.textContent = '0 Bông hoa';
     showToast('Đã làm mới giỏ hoa!');
   });
 
-  btnSendBouquet.addEventListener('click', (e) => {
+  btnSendBouquet.addEventListener('click', () => {
     if (bouquetFlowers.length === 0) {
-      showToast('Hãy chọn ít nhất 1 đóa hoa trước khi gửi nhé! 🌹', '⚠️');
+      showToast('Hãy chọn ít nhất 1 đóa hoa tặng Ngân nhé! 🌹', '⚠️');
       return;
     }
 
     const rect = btnSendBouquet.getBoundingClientRect();
     launchConfetti(rect.left + rect.width / 2, rect.top);
     playSparkleSound();
-    showToast(`💐 Đã trao gửi thành công ${bouquetFlowers.length} đóa hoa ngát hương cùng ngàn lời chúc!`, '💖');
+    showToast(`💐 Đã trao gửi trọn vẹn ${bouquetFlowers.length} đóa hoa ngát hương đến Hoàng Ngân!`, '💖');
   });
 
   // ==================================================================
-  // 8. SECTION 4: RÚT QUẺ MAY MẮN (FORTUNE BLOCKS)
+  // 9. SECTION: RÚT QUẺ MAY MẮN CHO HOÀNG NGÂN
   // ==================================================================
   const fortuneCards = document.querySelectorAll('.fortune-card-container');
 
@@ -657,16 +678,11 @@ document.addEventListener('DOMContentLoaded', () => {
         playSparkleSound();
         const rect = card.getBoundingClientRect();
         launchConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
-        showToast('✨ Quẻ may mắn đã được mở! Chúc bạn mọi sự an lành!');
+        showToast('✨ Quẻ may mắn của Ngân đã mở!');
       } else {
         playChime(440, 0.3);
       }
     });
-  });
-
-  // Smooth scroll helper for nav buttons
-  document.getElementById('btn-quick-wish').addEventListener('click', () => {
-    document.getElementById('card-section').scrollIntoView({ behavior: 'smooth' });
   });
 
 });
