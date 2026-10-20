@@ -115,54 +115,80 @@
         <p class="section-desc">Mỗi bức ảnh là một khoảnh khắc anh lưu giữ trong tim. Dù là lúc nào, Hoàng Ngân của anh cũng luôn xinh xắn và đáng yêu nhất!</p>
       </div>
 
-      <div class="gallery-grid">
-        <!-- Photo 1 -->
-        <div class="polaroid-card" data-img="assets/photo1.jpg" data-caption="Nụ cười dịu dàng làm tan chảy trái tim anh mỗi ngày!">
-          <div class="polaroid-img-wrapper">
-            <img src="assets/photo1.jpg" alt="Hoàng Ngân xinh xắn" class="polaroid-img" loading="lazy">
-            <span class="polaroid-tag">Khoảnh Khắc #1</span>
+      <!-- 3D Romantic Carousel Container -->
+      <div class="gallery-carousel-wrapper" id="gallery-carousel-root" aria-label="Kho ảnh kỷ niệm Hoàng Ngân">
+        <!-- Prev Button -->
+        <button class="carousel-nav-btn btn-prev" id="carousel-btn-prev" aria-label="Ảnh trước" title="Ảnh trước">
+          <span>&#10094;</span>
+        </button>
+
+        <!-- Carousel Stage / 3D Slides Track -->
+        <div class="carousel-stage" id="carousel-stage">
+          <!-- Slide 1 -->
+          <div class="carousel-slide slide-center" data-index="0" data-img="assets/photo1.jpg" data-caption="Nụ cười dịu dàng làm tan chảy trái tim anh mỗi ngày!">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo1.jpg" alt="Hoàng Ngân xinh xắn" class="polaroid-img" loading="lazy">
+              <span class="polaroid-tag">Khoảnh Khắc #1</span>
+            </div>
+            <div class="polaroid-caption">
+              <p class="polaroid-quote">"Nụ cười của Ngân là ánh nắng sưởi ấm anh"</p>
+              <span class="polaroid-date">YÊU THƯƠNG ĐONG ĐẦY ♥</span>
+            </div>
           </div>
-          <div class="polaroid-caption">
-            <p class="polaroid-quote">"Nụ cười của Ngân là ánh nắng sưởi ấm anh"</p>
-            <span class="polaroid-date">YÊU THƯƠNG ĐONG ĐẦY ♥</span>
+
+          <!-- Slide 2 -->
+          <div class="carousel-slide slide-right" data-index="1" data-img="assets/photo2.jpg" data-caption="Cô gái xinh đẹp, đáng yêu nhất trong mắt Ngọc Sơn!">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo2.jpg" alt="Hoàng Ngân dễ thương" class="polaroid-img" loading="lazy">
+              <span class="polaroid-tag">Khoảnh Khắc #2</span>
+            </div>
+            <div class="polaroid-caption">
+              <p class="polaroid-quote">"Ánh mắt ngọt ngào khiến anh say đắm"</p>
+              <span class="polaroid-date">CÔNG CHÚA CỦA ANH ♥</span>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-slide slide-back" data-index="2" data-img="assets/photo3.jpg" data-caption="Mỗi phút giây bên em đều là những ngày tháng tươi đẹp nhất!">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo3.jpg" alt="Hoàng Ngân rạng rỡ" class="polaroid-img" loading="lazy">
+              <span class="polaroid-tag">Khoảnh Khắc #3</span>
+            </div>
+            <div class="polaroid-caption">
+              <p class="polaroid-quote">"Bình yên là khi có Hoàng Ngân bên cạnh"</p>
+              <span class="polaroid-date">MÃI MÃI ĐỒNG HÀNH ♥</span>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="carousel-slide slide-left" data-index="3" data-img="assets/photo4.jpg" data-caption="Chúc em yêu 20/10 ngập tràn niềm vui và hạnh phúc!">
+            <div class="polaroid-img-wrapper">
+              <img src="assets/photo4.jpg" alt="Hoàng Ngân tuyệt đẹp" class="polaroid-img" loading="lazy">
+              <span class="polaroid-tag">Khoảnh Khắc #4</span>
+            </div>
+            <div class="polaroid-caption">
+              <p class="polaroid-quote">"Trọn đời này anh chỉ muốn chở che cho em"</p>
+              <span class="polaroid-date">NGỌC SƠN THƯƠNG NGÂN ♥</span>
+            </div>
           </div>
         </div>
 
-        <!-- Photo 2 -->
-        <div class="polaroid-card" data-img="assets/photo2.jpg" data-caption="Cô gái xinh đẹp, đáng yêu nhất trong mắt Ngọc Sơn!">
-          <div class="polaroid-img-wrapper">
-            <img src="assets/photo2.jpg" alt="Hoàng Ngân dễ thương" class="polaroid-img" loading="lazy">
-            <span class="polaroid-tag">Khoảnh Khắc #2</span>
-          </div>
-          <div class="polaroid-caption">
-            <p class="polaroid-quote">"Ánh mắt ngọt ngào khiến anh say đắm"</p>
-            <span class="polaroid-date">CÔNG CHÚA CỦA ANH ♥</span>
-          </div>
-        </div>
+        <!-- Next Button -->
+        <button class="carousel-nav-btn btn-next" id="carousel-btn-next" aria-label="Ảnh tiếp theo" title="Ảnh tiếp theo">
+          <span>&#10095;</span>
+        </button>
+      </div>
 
-        <!-- Photo 3 -->
-        <div class="polaroid-card" data-img="assets/photo3.jpg" data-caption="Mỗi phút giây bên em đều là những ngày tháng tươi đẹp nhất!">
-          <div class="polaroid-img-wrapper">
-            <img src="assets/photo3.jpg" alt="Hoàng Ngân rạng rỡ" class="polaroid-img" loading="lazy">
-            <span class="polaroid-tag">Khoảnh Khắc #3</span>
-          </div>
-          <div class="polaroid-caption">
-            <p class="polaroid-quote">"Bình yên là khi có Hoàng Ngân bên cạnh"</p>
-            <span class="polaroid-date">MÃI MÃI ĐỒNG HÀNH ♥</span>
-          </div>
-        </div>
+      <!-- Carousel Indicators / Dots -->
+      <div class="carousel-indicators" id="carousel-indicators" role="tablist" aria-label="Chọn ảnh">
+        <button class="indicator-dot active" data-slide="0" aria-label="Xem ảnh 1"></button>
+        <button class="indicator-dot" data-slide="1" aria-label="Xem ảnh 2"></button>
+        <button class="indicator-dot" data-slide="2" aria-label="Xem ảnh 3"></button>
+        <button class="indicator-dot" data-slide="3" aria-label="Xem ảnh 4"></button>
+      </div>
 
-        <!-- Photo 4 -->
-        <div class="polaroid-card" data-img="assets/photo4.jpg" data-caption="Chúc em yêu 20/10 ngập tràn niềm vui và hạnh phúc!">
-          <div class="polaroid-img-wrapper">
-            <img src="assets/photo4.jpg" alt="Hoàng Ngân tuyệt đẹp" class="polaroid-img" loading="lazy">
-            <span class="polaroid-tag">Khoảnh Khắc #4</span>
-          </div>
-          <div class="polaroid-caption">
-            <p class="polaroid-quote">"Trọn đời này anh chỉ muốn chở che cho em"</p>
-            <span class="polaroid-date">NGỌC SƠN THƯƠNG NGÂN ♥</span>
-          </div>
-        </div>
+      <div class="carousel-touch-hint">
+        <span>👈 Vuốt sang ngang hoặc chạm vào ảnh để xem chi tiết 👉</span>
       </div>
     </div>
   </section>

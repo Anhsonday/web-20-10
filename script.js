@@ -314,34 +314,195 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==================================================================
-  // 5. PHOTO LIGHTBOX PREVIEW (ZOOM MODAL)
+  // 5. 3D COVERFLOW DEPTH CAROUSEL (INFINITE LOOP & TOUCH SWIPE)
   // ==================================================================
-  const polaroids = document.querySelectorAll('.polaroid-card');
+  const carouselRoot = document.getElementById('gallery-carousel-root');
+  const carouselStage = document.getElementById('carousel-stage');
+  const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+  const btnPrev = document.getElementById('carousel-btn-prev');
+  const btnNext = document.getElementById('carousel-btn-next');
+  const indicatorDots = Array.from(document.querySelectorAll('.indicator-dot'));
+  const totalSlides = slides.length; // 4 images
+
   const lightboxModal = document.getElementById('lightbox-modal');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxCaption = document.getElementById('lightbox-caption');
   const lightboxClose = document.getElementById('lightbox-close');
 
-  polaroids.forEach(card => {
-    card.addEventListener('click', () => {
-      const src = card.getAttribute('data-img');
-      const caption = card.getAttribute('data-caption');
-      lightboxImg.src = src;
-      lightboxCaption.textContent = caption;
-      lightboxModal.classList.add('active');
-      playChime(659.25, 0.3);
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  const AUTOPLAY_DELAY = 3500; // 3.5 seconds
+
+  function updateCarousel(newIndex) {
+    currentIndex = (newIndex + totalSlides) % totalSlides;
+
+    slides.forEach((slide, idx) => {
+      // Calculate circular distance from currentIndex (0, 1, 2, 3)
+      const diff = (idx - currentIndex + totalSlides) % totalSlides;
+
+      slide.classList.remove('slide-center', 'slide-right', 'slide-left', 'slide-back');
+
+      if (diff === 0) {
+        slide.classList.add('slide-center');
+        slide.setAttribute('aria-hidden', 'false');
+      } else if (diff === 1) {
+        slide.classList.add('slide-right');
+        slide.setAttribute('aria-hidden', 'true');
+      } else if (diff === totalSlides - 1) { // diff === 3
+        slide.classList.add('slide-left');
+        slide.setAttribute('aria-hidden', 'true');
+      } else { // diff === 2
+        slide.classList.add('slide-back');
+        slide.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    // Update indicator dots
+    indicatorDots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentIndex);
+    });
+  }
+
+  function nextSlide() {
+    updateCarousel(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    updateCarousel(currentIndex - 1);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  // Arrow navigation
+  if (btnNext) {
+    btnNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextSlide();
+      playChime(659.25, 0.25);
+      startAutoplay();
+    });
+  }
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevSlide();
+      playChime(587.33, 0.25);
+      startAutoplay();
+    });
+  }
+
+  // Dot indicator navigation
+  indicatorDots.forEach((dot, idx) => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateCarousel(idx);
+      playChime(523.25 + idx * 40, 0.25);
+      startAutoplay();
     });
   });
 
-  lightboxClose.addEventListener('click', () => {
-    lightboxModal.classList.remove('active');
+  // Slide interactions:
+  // Clicking the active center slide opens Lightbox zoom;
+  // Clicking a flanking slide transitions it to center!
+  slides.forEach((slide, idx) => {
+    slide.addEventListener('click', () => {
+      if (idx === currentIndex) {
+        const src = slide.getAttribute('data-img');
+        const caption = slide.getAttribute('data-caption');
+        lightboxImg.src = src;
+        lightboxCaption.textContent = caption;
+        lightboxModal.classList.add('active');
+        playChime(783.99, 0.3);
+      } else {
+        updateCarousel(idx);
+        playChime(659.25, 0.25);
+        startAutoplay();
+      }
+    });
   });
 
-  lightboxModal.addEventListener('click', (e) => {
-    if (e.target === lightboxModal) {
+  // Lightbox Close
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', () => {
       lightboxModal.classList.remove('active');
-    }
-  });
+    });
+  }
+
+  if (lightboxModal) {
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) {
+        lightboxModal.classList.remove('active');
+      }
+    });
+  }
+
+  // Desktop Hover: pause autoplay on hover, resume on leave
+  if (carouselRoot) {
+    carouselRoot.addEventListener('mouseenter', stopAutoplay);
+    carouselRoot.addEventListener('mouseleave', startAutoplay);
+  }
+
+  // Mobile Touch Swipe Handling
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isSwiping = false;
+
+  if (carouselStage) {
+    carouselStage.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        isSwiping = true;
+        stopAutoplay();
+      }
+    }, { passive: true });
+
+    carouselStage.addEventListener('touchmove', (e) => {
+      if (!isSwiping || e.touches.length !== 1) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = currentX - touchStartX;
+      const diffY = currentY - touchStartY;
+
+      // Prevent page scrolling during distinct horizontal swipe
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
+        if (e.cancelable) e.preventDefault();
+      }
+    }, { passive: false });
+
+    carouselStage.addEventListener('touchend', (e) => {
+      if (!isSwiping) return;
+      isSwiping = false;
+      const touchEndX = e.changedTouches[0].clientX;
+      const diffX = touchEndX - touchStartX;
+
+      if (Math.abs(diffX) > 35) {
+        if (diffX < 0) {
+          nextSlide(); // Swipe left -> Next
+          playChime(659.25, 0.25);
+        } else {
+          prevSlide(); // Swipe right -> Prev
+          playChime(587.33, 0.25);
+        }
+      }
+      startAutoplay();
+    }, { passive: true });
+  }
+
+  // Initialize Carousel & Start Autoplay
+  updateCarousel(0);
+  startAutoplay();
 
   // Nav scroll to gallery
   const btnQuickGallery = document.getElementById('btn-quick-gallery');
@@ -350,6 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('gallery-section').scrollIntoView({ behavior: 'smooth' });
     });
   }
+
 
   // ==================================================================
   // 6. SECTION: HỘP QUÀ TÌNH YÊU & BỨC THƯ TỪ NGỌC SƠN GỬI HOÀNG NGÂN
